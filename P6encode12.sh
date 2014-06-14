@@ -8,7 +8,7 @@ set -x
 cd animation
 qp=12
 yuv=YDzDx.yuv
-$EDRHOME/HEVC/HM/bin/TAppEncoderHighBitDepthStatic -c $EDRHOME/HEVC/HM/cfg/encoder_randomaccess_main10.cfg -i $yuv -wdt 1920 -hgt 1080 -fr 24 --InputBitDepth=12 --InternalBitDepth=12 --InputChromaFormat=420 -vui 1 --VideoFullRange=0 --ColourDescriptionPresent=1 --ColourPrimaries=9 --TransferCharateristics=15 --MatrixCoefficients=9 --Profile=main-RExt --Tier=main --Level=4.1  -b str$qp.bin -o rec$qp.yuv -q $qp 2>&1 | tee logencoder_$qp  &
+$EDRHOME/HEVC/HM/bin/TAppEncoderHighBitDepthStatic -c $EDRHOME/HEVC/HM/cfg/encoder_randomaccess_main10.cfg -i $yuv -wdt 1920 -hgt 1080 -f 2134 -fr 24 --InputBitDepth=12 --InternalBitDepth=12 --InputChromaFormat=420 -vui 1 --VideoFullRange=0 --ColourDescriptionPresent=1 --ColourPrimaries=9 --TransferCharateristics=15 --MatrixCoefficients=9 --Profile=main-RExt --Tier=main --Level=4.1  -b str$qp.bin -o rec$qp.yuv -q $qp 2>&1 | tee logencoder_$qp  &
 
 exit
 
