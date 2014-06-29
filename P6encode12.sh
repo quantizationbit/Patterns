@@ -15,16 +15,16 @@ exit
 
 
 crf=23
-x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
+x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 --no-lft  --repeat-headers  -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
 
 crf=18
-x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
+x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 --no-lft  --repeat-headers -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
 
 crf=30
-x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
+x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 --no-lft  --repeat-headers -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
 
 crf=8
-x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
+x265 --input YDzDx.yuv --input-depth 12 --input-res 1920x1080 --fps 23.976 --crf $crf --vbv-maxrate 40000 --vbv-bufsize 140000  -p medium --bframes 12 -I 72 --psnr --sar 1 --range limited --colorprim bt2020 --transfer bt2020-10 --colormatrix bt2020nc --chromaloc 1 --no-lft  --repeat-headers -o pattern6PQ2020-$crf.bin 2>&1 | tee log-$crf.txt
 
 
 

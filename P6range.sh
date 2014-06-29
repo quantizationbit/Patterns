@@ -36,8 +36,8 @@ if [ $c1 -le $CMax ]; then
 # Scaling input tiff which is 0.48828125 (as 32000 of 65535) to 0.5 then with scales list above
 # will result in output ranges from 0.01 nits to about 8000 that way with the minor range around
 # the test pattern will use most code values across entire 0.005-10k nit PQ range.
-(../pattern6 -frame $num -speed 3 -percent $rampPercent; mv -fv $numStr".tiff" $frameStr".tiff"; ctlrender -force -ctl $EDRHOME/ACES/CTL/scaleMultiply.ctl -global_param1 scale 1.024 -ctl $EDRHOME/ACES/CTL/scaleMultiply.ctl -global_param1 scale ${scales[$scale]} -ctl $EDRHOME/ACES/CTL/P3-2-ACES.ctl -ctl $EDRHOME/ACES/CTL/odt_PQ10k2020.ctl $frameStr".tiff" -format tiff16 $frameStr"C.tiff"; rm -fv $frameStr".tiff"; ctlrender -force -ctl $EDRHOME/ACES/CTL/INVPQ10k2020-2-XYZ.ctl -ctl $EDRHOME/ACES/CTL/nullA.ctl $frameStr"C.tiff" -format exr16 "XpYpZp"$frameStr".exr") &
-#ctlrender -force -verbose -ctl $EDRHOME/ACES/CTL/scaleMultiply.ctl -global_param1 scale 10.0 -ctl $EDRHOME/ACES/CTL/P3-2-ACES.ctl -ctl $EDRHOME/ACES/CTL/odt_rec2020_smpte_250nits.ctl $numStr".tiff" -format tiff16 $numStr"C.tiff"
+(../pattern6 -frame $num -speed 3 -percent $rampPercent; mv -fv $numStr".tiff" $frameStr".tiff"; ctlrender -force -ctl $EDRHOME/ACES/CTL/scaleMultiply.ctl -param1 scale 1.024 -ctl $EDRHOME/ACES/CTL/scaleMultiply.ctl -param1 scale ${scales[$scale]} -ctl $EDRHOME/ACES/CTL/P3-2-ACES.ctl -ctl $EDRHOME/ACES/CTL/odt_PQ10k2020.ctl $frameStr".tiff" -format tiff16 $frameStr"C.tiff"; rm -fv $frameStr".tiff"; ctlrender -force -ctl $EDRHOME/ACES/CTL/INVPQ10k2020-2-XYZ.ctl -ctl $EDRHOME/ACES/CTL/nullA.ctl $frameStr"C.tiff" -format exr16 "XpYpZp"$frameStr".exr") &
+#ctlrender -force -verbose -ctl $EDRHOME/ACES/CTL/scaleMultiply.ctl -param1 scale 10.0 -ctl $EDRHOME/ACES/CTL/P3-2-ACES.ctl -ctl $EDRHOME/ACES/CTL/odt_rec2020_smpte_250nits.ctl $numStr".tiff" -format tiff16 $numStr"C.tiff"
 sleep 1.0
 
 frame=`expr $frame + 1`
