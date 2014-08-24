@@ -1,9 +1,9 @@
 set -x
 
 
-#./P6range.sh 
+./P6range.sh 
 
-#./P6Bitdepth.sh
+./P6Bitdepth.sh
  
 ./P6encode.sh
 
