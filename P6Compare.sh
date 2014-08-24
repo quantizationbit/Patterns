@@ -5,7 +5,7 @@ set -x
 CTLBASE=$EDRHOME/ACES/CTL
 # DPXEXR Tools (sigma_compare)
 DPXEXR=$EDRHOME/Tools/demos/sc
-last=29  # or 749
+last=59 #29  # or 749
 
 
 cd animation
@@ -34,10 +34,45 @@ $DPXEXR/sigma_compare_PQ  XpYpZp%05d.exr 14b-DIR/XpYpZp%06d.tif.exr 0  $last 1.0
 
 # HEVC
 # SigmaCompare HEVC to exr
-$DPXEXR/sigma_compare_PQ  XpYpZp%05d.exr pattern6PQ2020-20-DIR/XpYpZp%06d.tif.exr 0  $last 1.0  2>&1 | tee CMP16-HEVC-x265-10b.log
+
+#x265
+BITDEPTH=10
+YUVBASE=C-$BITDEPTH"b"
+crf=24
+BASE=x265-$YUVBASE-$crf
+DIR=HEVC-$BASE-DIR
+$DPXEXR/sigma_compare_PQ  XpYpZp%05d.exr $DIR/XpYpZp%06d.tif.exr 0  $last 1.0  2>&1 | tee CMP16-HEVC-x265-10b.log
+
+# HM 10 bit
+BITDEPTH=10
+YUVBASE=C-$BITDEPTH"b"
+BASE=HM-$YUVBASE
+DIR=HEVC-$BASE-DIR
+$DPXEXR/sigma_compare_PQ  XpYpZp%05d.exr $DIR/XpYpZp%06d.tif.exr 0  $last 1.0  2>&1 | tee CMP16-HEVC-HM-10b.log
+
+# HM 12 bit
+BITDEPTH=12
+YUVBASE=C-$BITDEPTH"b"
+BASE=HM-$YUVBASE
+DIR=HEVC-$BASE-DIR
+$DPXEXR/sigma_compare_PQ  XpYpZp%05d.exr $DIR/XpYpZp%06d.tif.exr 0  $last 1.0  2>&1 | tee CMP16-HEVC-HM-12b.log
+
+
+# HM 14 bit
+BITDEPTH=14
+YUVBASE=C-$BITDEPTH"b"
+BASE=HM-$YUVBASE
+DIR=HEVC-$BASE-DIR
+$DPXEXR/sigma_compare_PQ  XpYpZp%05d.exr $DIR/XpYpZp%06d.tif.exr 0  $last 1.0  2>&1 | tee CMP16-HEVC-HM-14b.log
+
 
 
 cd ..
 
 exit
+
+
+
+
+
 

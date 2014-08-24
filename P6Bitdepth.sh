@@ -29,8 +29,7 @@ scales=(0.005 0.01 0.025 0.05 0.1 0.2 0.4 0.6 0.8 \
 rm -fv *.yuv
 
 for scale in `seq 0 29`; do
-#for num in `seq 0 24`; do
-num=0
+for num in `seq 0 1`; do
  
  #numStr=`printf "%05d" $num`
  frameStr=`printf "%05d" $frame`
@@ -73,10 +72,10 @@ $EDRHOME/Tools/YUV/tif2yuv $frameStr"C-14b.tiff" B14 2020 HD1920 -o C-14b.yuv
 frame=`expr $frame + 1`
 
 
-# end num frames loop
-#done
-# end scale sequence loop
-done
+
+done   # end num frames loop
+
+done   # end scale sequence loop
 
 
 cd ..
