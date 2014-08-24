@@ -8,9 +8,6 @@ mkdir animation
 cd animation
 
 
-#rm *tiff
-rm YDzDx.yuv
-
 c1=0
 CMax=4
 
@@ -26,8 +23,7 @@ scales=(0.005 0.01 0.025 0.05 0.1 0.2 0.4 0.6 0.8 \
         800.0 1000.0 2000.0 3000.0 4000.0 5000.0 8000.0 9000.0 10000.0 )
 
 for scale in `seq 0 29`; do
-#for num in `seq 0 24`; do
-num=0
+for num in `seq 0 1`; do
  
  #numStr=`printf "%05d" $num`
  frameStr=`printf "%05d" $frame`
@@ -63,10 +59,11 @@ done
 c1=0
 fi
 
-# end num frames loop
-#done
-# end scale sequence loop
-done
+
+done   # end num frames loop
+
+done   # end scale sequence loop
+
 
 for job in `jobs -p`
 do

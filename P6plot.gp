@@ -30,7 +30,7 @@ set ylabel "one sigma as % of average at f-stop\n(%)" font "Calibri, 14"
 set yrange [ 0.00000 : 8.00000 ] noreverse nowriteback
 set format y "%0.1f"
 set y2label "Pixel Count\n(from Y data)" font "Calibri, 12"
-set y2range [1:1000000]
+#set y2range [1:1000000]
 
 set grid
 
