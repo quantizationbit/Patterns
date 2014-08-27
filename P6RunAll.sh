@@ -1,5 +1,6 @@
 set -x
 
+./P6rangeSDR.sh
 
 ./P6range.sh 
 
