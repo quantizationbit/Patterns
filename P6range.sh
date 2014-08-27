@@ -15,7 +15,7 @@ num=0
 scale=0
 frame=0
 frameStr=0
-rampPercent=10.0
+rampPercent=25.0
 
 
 scales=(0.005 0.01 0.025 0.05 0.1 0.2 0.4 0.6 0.8 \
