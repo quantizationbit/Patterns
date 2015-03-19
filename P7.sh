@@ -28,21 +28,21 @@ colors=( 102 256 512 768 922 1023)
 for value in "${colors[@]}"; do
  
 ../pattern7 -r $value -g 0 -b 0 -percent 10
-../pattern7 -r 0 -g 0 -b $value -percent 10
+../pattern7 -r 0 -g $value -b 0 -percent 10
 ../pattern7 -r 0 -g 0 -b $value -percent 10
 ../pattern7 -r $value -g $value -b 0 -percent 10
 ../pattern7 -r 0 -g $value -b $value -percent 10
 ../pattern7 -r $value -g 0 -b $value -percent 10
 
 ../pattern7 -r $value -g 0 -b 0 -percent 33
-../pattern7 -r 0 -g 0 -b $value -percent 33
+../pattern7 -r 0 -g $value -b 0 -percent 33
 ../pattern7 -r 0 -g 0 -b $value -percent 33
 ../pattern7 -r $value -g $value -b 0 -percent 33
 ../pattern7 -r 0 -g $value -b $value -percent 33
 ../pattern7 -r $value -g 0 -b $value -percent 33
 
 ../pattern7 -r $value -g 0 -b 0 -percent 100
-../pattern7 -r 0 -g 0 -b $value -percent 100
+../pattern7 -r 0 -g $value -b 0  -percent 100
 ../pattern7 -r 0 -g 0 -b $value -percent 100
 ../pattern7 -r $value -g $value -b 0 -percent 100
 ../pattern7 -r 0 -g $value -b $value -percent 100
@@ -51,6 +51,7 @@ for value in "${colors[@]}"; do
 done  
 
 cd ..
+exit
 
 
 #
