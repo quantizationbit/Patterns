@@ -25,3 +25,14 @@ rm -fv *ANSI*tiff
 ./pattern8  -min 0.0 -max 200.0  
 ./pattern8  -min 0.0 -max 200.0  -flip
 
+./pattern8  -min 0.5 -max 200.0  
+./pattern8  -min 0.5 -max 200.0  -flip
+
+./pattern8  -min 1.0 -max 200.0  
+./pattern8  -min 1.0 -max 200.0  -flip
+
+./pattern8  -min 2.0 -max 200.0  
+./pattern8  -min 2.0 -max 200.0  -flip
+
+./pattern8  -min 10.0 -max 200.0  
+./pattern8  -min 10.0 -max 200.0  -flip
