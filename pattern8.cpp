@@ -29,10 +29,10 @@ using namespace std;
   TIFF* tif;
   
   // hard code 1920x1080
-  unsigned short horiz = 1920;
+  unsigned short horiz = 3840;
   unsigned short stripsize = horiz*2*3;
   unsigned short pixelStart = 0;
-  unsigned short numStrips = 1080;
+  unsigned short numStrips = 2160;
   unsigned short height5 = numStrips/5;
   unsigned short width5 = horiz/5;
   unsigned short value = 16*256;
@@ -41,6 +41,8 @@ using namespace std;
   unsigned short minValue;
   unsigned short maxValue;
   int red, green, blue;
+  bool flip = false;
+  
   float percent;
 
   char tifName[] = "000000000000000000000000000000.tiff";
@@ -68,17 +70,33 @@ main(int argc, char* argv[])
 					if(arg < argc)maxNits=atof(argv[arg]);		 
 					printf("max nits: %f\n",maxNits);   	
 		     }	
-		     		     
+		     
+		     if(strcmp(argv[arg],"-flip")==0) {
+					flip=true;		 
+					printf("Flip: %d\n",flip);  		     
+		     }		     
 	     arg++;
 	     }
 	     
 	 minValue = (PQ10000_r(minNits/10000.0)*65535.0 + 0.5);  
 	 maxValue = (PQ10000_r(maxNits/10000.0)*65535.0 + 0.5);  
+	 
+	 if(flip)
+	 {
+		if(value == minValue) {
+			value = maxValue;
+		} else {
+			value = minValue;
+		}		 
+	 }
 
   
     // set up  frame name
-  sprintf(tifName,"%d_%d_%d_%d.tiff", red,green,blue,(int)(percent+0.5)); 
-  sprintf(tifName,"ANSI5x5.tiff"); 
+  if(flip) {
+	  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP.tiff", minNits,maxNits);
+  } else {
+	  sprintf(tifName,"ANSI5x5_%.3f__%.3f.tiff", minNits,maxNits);
+  } 
 
   // Array to store line of output for writing process
   // will be allocated to line width with 4 unsigned shorts
