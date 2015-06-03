@@ -38,10 +38,22 @@ using namespace std;
   unsigned short value = 16*256;
   double minNits = 0.0;
   double maxNits = 10000.0;
+  double maxCNits= 10000.0;
   unsigned short minValue;
   unsigned short maxValue;
+  unsigned short maxCValue;
   int red, green, blue;
   bool flip = false;
+  bool legal = false;
+  bool corner = false;
+  bool center = false;
+  float area = 0.1; // 10%
+  unsigned short centerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/9) + 0.5);
+  unsigned short cornerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/36.0) + 0.5);
+  unsigned short centerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/16) + 0.5);
+  unsigned short cornerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/64.0) + 0.5);
+  unsigned short centerStartTop = numStrips/2 - centerSizeV/2;
+  unsigned short centerStartLeft = stripsize/4 - 3*centerSizeH/2;
   
   float percent;
 
@@ -70,16 +82,48 @@ main(int argc, char* argv[])
 					if(arg < argc)maxNits=atof(argv[arg]);		 
 					printf("max nits: %f\n",maxNits);   	
 		     }	
+
+		     if(strcmp(argv[arg],"-maxC")==0) {
+					arg++;
+					if(arg < argc)maxCNits=atof(argv[arg]);		 
+					printf("max nits: %f\n",maxCNits);   	
+		     }	
 		     
 		     if(strcmp(argv[arg],"-flip")==0) {
 					flip=true;		 
 					printf("Flip: %d\n",flip);  		     
+		     }	
+		     
+		     if(strcmp(argv[arg],"-legal")==0) {
+					legal=true;		 
+					printf("Flip: %d\n",legal);  		     
 		     }		     
+		     
+		     if(strcmp(argv[arg],"-corner")==0) {
+					corner=true;		 
+					printf("Flip: %d\n",corner);  		     
+		     }	
+		     
+		     if(strcmp(argv[arg],"-center")==0) {
+					center=true;		 
+					printf("Flip: %d\n",center);  		     
+		     }			     		     	     
 	     arg++;
 	     }
 	     
-	 minValue = (PQ10000_r(minNits/10000.0)*65535.0 + 0.5);  
-	 maxValue = (PQ10000_r(maxNits/10000.0)*65535.0 + 0.5);  
+ 
+	 
+	 if (legal) {
+		 float range = 60160.0 - 4096.0;
+		 minValue = (PQ10000_r(minNits/10000.0)*range + 4096.0 + 0.5);  
+		 maxValue = (PQ10000_r(maxNits/10000.0)*range + 4096.0 + 0.5);
+		 maxCValue = (PQ10000_r(maxCNits/10000.0)*range + 4096.0 + 0.5); 		 
+	 } else {
+		 minValue = (PQ10000_r(minNits/10000.0)*65535.0 + 0.5);  
+		 maxValue = (PQ10000_r(maxNits/10000.0)*65535.0 + 0.5); 
+		 maxCValue = (PQ10000_r(maxCNits/10000.0)*65535.0 + 0.5); 	 
+	 }
+	 
 	 
 	 if(flip)
 	 {
@@ -92,11 +136,61 @@ main(int argc, char* argv[])
 
   
     // set up  frame name
-  if(flip) {
-	  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP.tiff", minNits,maxNits);
-  } else {
-	  sprintf(tifName,"ANSI5x5_%.3f__%.3f.tiff", minNits,maxNits);
-  } 
+  
+  if(legal) {
+	  if(flip) {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP.tiff", minNits,maxNits);
+	  } else {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL.tiff", minNits,maxNits);
+	  } 
+   } else  {
+
+	  if(flip) {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP.tiff", minNits,maxNits);
+	  } else {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f.tiff", minNits,maxNits);
+	  }
+   }
+   
+   
+  if(corner) {
+	  if(legal) {
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER.tiff", minNits,maxNits);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CORNER.tiff", minNits,maxNits);
+		  } 
+	   } else  {
+	
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CORNER.tiff", minNits,maxNits);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CORNER.tiff", minNits,maxNits);
+		  }
+	   }	  
+  }
+  
+  if(center) {
+	  if(legal) {
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER.tiff", minNits,maxNits);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CENTER.tiff", minNits,maxNits);
+		  } 
+	   } else  {
+	
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CENTER.tiff", minNits,maxNits);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CENTER.tiff", minNits,maxNits);
+		  }
+	   }	  
+  }
+  
+  
+  
+  
+     
 
   // Array to store line of output for writing process
   // will be allocated to line width with 4 unsigned shorts
@@ -148,6 +242,58 @@ main(int argc, char* argv[])
 					Line[3*subPixel+pixel+1] = value;    
 					Line[3*subPixel+pixel+2] = value;   				
 							
+
+					// Determine if corner box or not and write in.
+					if(corner) {
+						//top left
+						if(line >= 0 && line < cornerSizeV) {
+							if((3*subPixel+pixel) >= 0 && (3*subPixel+pixel) < 3*cornerSizeH) {
+							    Line[3*subPixel+pixel]   = maxCValue;   
+								Line[3*subPixel+pixel+1] = maxCValue;    
+								Line[3*subPixel+pixel+2] = maxCValue; 
+							}
+						}
+						//top right						
+						if(line >= 0 && line < cornerSizeV) {
+							if((3*subPixel+pixel) >= (3*arraySizeX - 3*cornerSizeH) && (3*subPixel+pixel) < 3*arraySizeX) {
+							    Line[3*subPixel+pixel]   = maxCValue;   
+								Line[3*subPixel+pixel+1] = maxCValue;    
+								Line[3*subPixel+pixel+2] = maxCValue; 
+							}
+						}
+
+						//bottom left
+						if(line >= (arraySizeY - cornerSizeV) && line < arraySizeY) {
+							if((3*subPixel+pixel) >= 0 && (3*subPixel+pixel) < 3*cornerSizeH) {
+							    Line[3*subPixel+pixel]   = maxCValue;   
+								Line[3*subPixel+pixel+1] = maxCValue;    
+								Line[3*subPixel+pixel+2] = maxCValue; 
+							}
+						}
+						//bottom right						
+						if(line >= (arraySizeY - cornerSizeV) && line < arraySizeY) {
+							if((3*subPixel+pixel) >= (3*arraySizeX - 3*cornerSizeH) && (3*subPixel+pixel) < 3*arraySizeX) {
+							    Line[3*subPixel+pixel]   = maxCValue;   
+								Line[3*subPixel+pixel+1] = maxCValue;    
+								Line[3*subPixel+pixel+2] = maxCValue; 
+							}
+						}						
+												
+					}
+					
+					if (center) {
+						if(line >= centerStartTop && line < centerStartTop+centerSizeV) {
+							if((3*subPixel+pixel) >= centerStartLeft && (3*subPixel+pixel) < (centerStartLeft + 3*centerSizeH)) {
+							    Line[3*subPixel+pixel]   = maxCValue;   
+								Line[3*subPixel+pixel+1] = maxCValue;    
+								Line[3*subPixel+pixel+2] = maxCValue; 
+							}
+						}
+						
+					}
+
+
+
 				}
 				
 				if(value == minValue) {
@@ -155,6 +301,8 @@ main(int argc, char* argv[])
 				} else {
 					value = minValue;
 				}			
+
+
 
 			}
 
@@ -164,6 +312,11 @@ main(int argc, char* argv[])
 				value = minValue;
 			}						
 
+
+			
+			
+			
+			
 			TIFFWriteRawStrip(tif, (tstrip_t)line, (tdata_t)Line, 3*arraySizeX*2);
 
 		}		

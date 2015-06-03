@@ -3,6 +3,12 @@ set -x
 make
 rm -fv *ANSI*tiff
 
+./pattern8  -min 0.1 -max 5.0  -flip -center -legal
+./pattern8  -min 0.1 -max 5.0  -flip -corner -legal
+
+exit
+
+
 ./pattern8  -min 0.0 -max 10000.0  
 ./pattern8  -min 0.0 -max 10000.0  -flip
 
