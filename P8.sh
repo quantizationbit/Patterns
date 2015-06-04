@@ -3,108 +3,49 @@ set -x
 make
 rm -fv *ANSI*tiff
 
-./pattern8  -min 0.1 -max 1.0 -maxC 500.0  -corner 
-./pattern8  -min 0.1 -max 1.0 -maxC 500.0  -corner -flip
-./pattern8  -min 0.1 -max 1.0 -maxC 500.0  -center
-
-exit
-
-
-./pattern8  -min 0.1 -max 1.0 -maxC 500.0  -corner 
-./pattern8  -min 0.0 -max 1.0 -maxC 500.0  -corner 
+# ANSI Full Range
 ./pattern8  -min 0.0 -max 10000.0
-./pattern8  -min 0.0 -max 0.0 -maxC 500.0 -corner
+
+# Corner Box Full Range
+./pattern8  -min 0.0 -max 0.0  -maxC 10000.0 -corner
 
 
-exit
+# ANSI dim 0.01 with Corner 500
+./pattern8  -min 0.0 -max 0.10  -maxC 500.0 -corner
 
 
-./pattern8  -min 0.1 -max 1.0 -maxC 500.0 -flip -corner -legal
-
-exit
-
-
-./pattern8  -min 0.0 -max 10000.0  
-./pattern8  -min 0.0 -max 10000.0  -flip
+# ANSI dim  0/0.1
+./pattern8  -min 0.0 -max 0.10
 
 
-./pattern8  -min 0.1 -max 10000.0  
-./pattern8  -min 0.1 -max 10000.0  -flip
+# ANSI dim 0.0/1.0 with Corner 500
+./pattern8  -min 0.0 -max 1.0 -maxC 500.0 -corner
 
-./pattern8  -min 0.1 -max 200.0  
-./pattern8  -min 0.1 -max 200.0  -flip
+# ANSI dim 0.1/1.0 with Corner 500
+./pattern8  -min 0.1 -max 1.0 -maxC 500.0 -corner
 
-./pattern8  -min 0.01 -max 200.0  
-./pattern8  -min 0.01 -max 200.0  -flip
+# ANSI dim 0.1/1.0 with Corner 200
+./pattern8  -min 0.1 -max 1.0  -maxC 200.0 -corner
 
-./pattern8  -min 0.05 -max 200.0  
-./pattern8  -min 0.05 -max 200.0  -flip
+#ANSI 500 to 0
+./pattern8  -min 0.0  -max 500.0
 
-./pattern8  -min 0.005 -max 200.0  
-./pattern8  -min 0.005 -max 200.0  -flip
-
-./pattern8  -min 0.0 -max 200.0  
-./pattern8  -min 0.0 -max 200.0  -flip
-
-./pattern8  -min 0.5 -max 200.0  
-./pattern8  -min 0.5 -max 200.0  -flip
-
-./pattern8  -min 1.0 -max 200.0  
-./pattern8  -min 1.0 -max 200.0  -flip
-
-./pattern8  -min 2.0 -max 200.0  
-./pattern8  -min 2.0 -max 200.0  -flip
-
-./pattern8  -min 5.0 -max 200.0  
-./pattern8  -min 5.0 -max 200.0  -flip
-
-./pattern8  -min 0.0 -max 500.0  
-./pattern8  -min 0.0 -max 500.0  -flip
-
-./pattern8  -min 0.1 -max 500.0  
-./pattern8  -min 0.1 -max 500.0  -flip
-
-./pattern8  -min 0.5 -max 500.0  
-./pattern8  -min 0.5 -max 500.0  -flip
-
-./pattern8  -min 1.0 -max 500.0  
-./pattern8  -min 1.0 -max 500.0  -flip
-
-./pattern8  -min 2.0 -max 500.0  
-./pattern8  -min 2.0 -max 500.0  -flip
-
-./pattern8  -min 5.0 -max 500.0  
-./pattern8  -min 5.0 -max 500.0  -flip
+# dim but on ANSI  0.1/1.0
+./pattern8  -min 0.1  -max 1.0
 
 
-
-./pattern8  -min 0.0 -max 0.01  
-./pattern8  -min 0.0 -max 0.02
-./pattern8  -min 0.0 -max 0.03
-./pattern8  -min 0.0 -max 0.04
-./pattern8  -min 0.0 -max 0.05
-./pattern8  -min 0.0 -max 0.1
+# ANSI very dim 0.0/0.5
 ./pattern8  -min 0.0 -max 0.5
 
-
-./pattern8  -min 0.05 -max 0.1
-./pattern8  -min 0.05 -max 0.2
-./pattern8  -min 0.05 -max 0.3
-./pattern8  -min 0.05 -max 0.4
-./pattern8  -min 0.05 -max 0.5
+# ANSI very dim 0.0/0.05 with Corner 200
+./pattern8  -min 0.0 -max 0.05  -maxC 200.0 -corner
 
 
-./pattern8  -min 0.25 -max 2.5
-./pattern8  -min 0.25 -max 25.0
-./pattern8  -min 0.25 -max 250.0
-./pattern8  -min 0.25 -max 500.0
-./pattern8  -min 0.25 -max 2500.0
 
-./pattern8  -min 0.0 -max 2.5
-./pattern8  -min 0.0 -max 25.0
-./pattern8  -min 0.0 -max 250.0
-./pattern8  -min 0.0 -max 500.0
-./pattern8  -min 0.0 -max 2500.0
-
+for pattern in *ANSI*tiff
+do
+convert $pattern -resize 960x540 -quality 90 ${pattern%tiff}jpg
+#rm -fv $pattern
+done
 
 
