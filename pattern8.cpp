@@ -156,16 +156,16 @@ main(int argc, char* argv[])
   if(corner) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CORNER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CORNER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CORNER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  }
 	   }	  
   }
@@ -173,16 +173,16 @@ main(int argc, char* argv[])
   if(center) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CENTER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CENTER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CENTER.tiff", minNits,maxNits);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
 		  }
 	   }	  
   }
