@@ -37,6 +37,9 @@ rm -fv *ANSI*tiff
 # ANSI very dim 0.0/0.5
 ./pattern8  -min 0.0 -max 0.5
 
+# ANSI very dim 0.0/0.05
+./pattern8  -min 0.0 -max 0.05
+
 # ANSI very dim 0.0/0.05 with Corner 200
 ./pattern8  -min 0.0 -max 0.05  -maxC 200.0 -corner
 
