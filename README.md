@@ -1,8 +1,23 @@
 Various patterns for simple testing.
 
-patern6:
+**pattern8** (ANSI 5x5 / Corner Box / Center Box)
+This tool will generate a 16-bit tiff file with an ANSI and/or Corner/Center Box pattern in many permutations based on input arguments.  For example `pattern8  -min 0.1 -max 1.0 -maxC 500.0 -corner` will generate a background 5x5 ANSI pattern alternating between 0.1 and 1.0 cd/m2 with 500 cd/m2 corner 2.5% area each boxes. Additional options are:
 
-Generates a single frame from a sequence. This pattern has color gradients that are somewhat smeared around by a small bouncing ball moving through the frame that changes the slope and direction of the gradiants dynamically. Very ad-hoc algorithmn intended to create imagary with severe banding issues in color and grayscale.
+```
+-min and -max set the ANSI 5x5 nit levels, setting them the same or zero flattens the background
+-corner turns on the corner box with -maxC to set the cd/m2 of the corners
+-center turns on a center box with -minC to set the cd/m2 of the center box
+-flip will generate the reversed ANSI pattern8
+-legal will generate a legal range output (RGB)
+The file name is generated roughly from the parameter values used.
+```
+
+**pattern7**
+See P7.sh.  Generates center boxes of size and rgb code value determined from arguments.
+
+**pattern6**:
+
+Generates a single frame out of a sequence. This pattern has color gradients that are somewhat smeared around by a small bouncing ball moving through the frame that changes the slope and direction of the gradiants dynamically. Very ad-hoc algorithmn intended to create imagary with severe banding issues in color and grayscale.
 
 Typical usage would be to use "pattern6" to generate a sequence of frames (like 10 seconds or more) then use other tools such as ctlrender to matrix it into a desired colorspace and gamma and then yuv. The entire sequence can then be compressed for testing.
 
