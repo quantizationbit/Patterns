@@ -55,9 +55,17 @@ using namespace std;
   unsigned short centerStartTop = numStrips/2 - centerSizeV/2;
   unsigned short centerStartLeft = stripsize/4 - 3*centerSizeH/2;
   
+  int idx;
+  bool indexF = false;
+  
+  // color scaling
+  float r=1.0;
+  float g=1.0;
+  float b=1.0;
+  
   float percent;
 
-  char tifName[] = "000000000000000000000000000000.tiff";
+  char tifName[] = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.tiff";
 
   
 
@@ -68,8 +76,13 @@ main(int argc, char* argv[])
 	     //Process Args:
 	     short arg = 1;
 	     while(arg < argc) {
-	     	
  
+		     if(strcmp(argv[arg],"-idx")==0) {
+					arg++;
+					indexF=true;
+					if(arg < argc)idx=atoi(argv[arg]);		 
+					printf("index: %d\n",idx);   	
+		     } 
 
 		     if(strcmp(argv[arg],"-min")==0) {
 					arg++;
@@ -89,6 +102,25 @@ main(int argc, char* argv[])
 					printf("max nits: %f\n",maxCNits);   	
 		     }	
 		     
+		     
+		     if(strcmp(argv[arg],"-r")==0) {
+					arg++;
+					if(arg < argc)r=atof(argv[arg]);		 
+					printf("r scale factor: %f\n",r);   	
+		     }
+		     
+		     if(strcmp(argv[arg],"-g")==0) {
+					arg++;
+					if(arg < argc)g=atof(argv[arg]);		 
+					printf("g scale factor: %f\n",g);   	
+		     }
+		     
+		     if(strcmp(argv[arg],"-b")==0) {
+					arg++;
+					if(arg < argc)b=atof(argv[arg]);		 
+					printf("b scale factor: %f\n",b);   	
+		     }		     
+		     
 		     if(strcmp(argv[arg],"-flip")==0) {
 					flip=true;		 
 					printf("Flip: %d\n",flip);  		     
@@ -107,7 +139,9 @@ main(int argc, char* argv[])
 		     if(strcmp(argv[arg],"-center")==0) {
 					center=true;		 
 					printf("Flip: %d\n",center);  		     
-		     }			     		     	     
+		     }	
+
+		          		     		     	     
 	     arg++;
 	     }
 	     
@@ -136,19 +170,23 @@ main(int argc, char* argv[])
 
   
     // set up  frame name
-  
+    
+if(indexF) {
+	
+  printf("Index: %d\n",idx);
+
   if(legal) {
 	  if(flip) {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP.tiff", minNits,maxNits);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff",idx, minNits,maxNits,r,g,b);
 	  } else {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL.tiff", minNits,maxNits);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,r,g,b);
 	  } 
    } else  {
 
 	  if(flip) {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP.tiff", minNits,maxNits);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,r,g,b);
 	  } else {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f.tiff", minNits,maxNits);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,r,g,b);
 	  }
    }
    
@@ -156,16 +194,16 @@ main(int argc, char* argv[])
   if(corner) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CORNER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  }
 	   }	  
   }
@@ -173,20 +211,71 @@ main(int argc, char* argv[])
   if(center) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CENTER_%.1f.tiff", minNits,maxNits,maxCNits);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+		  }
+	   }	  
+  }	
+} else     {	    
+  
+  if(legal) {
+	  if(flip) {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+	  } else {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+	  } 
+   } else  {
+
+	  if(flip) {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+	  } else {
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+	  }
+   }
+   
+   
+  if(corner) {
+	  if(legal) {
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+		  } 
+	   } else  {
+	
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  }
 	   }	  
   }
   
+  if(center) {
+	  if(legal) {
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+		  } 
+	   } else  {
+	
+		  if(flip) {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+		  } else {
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+		  }
+	   }	  
+  }
+}  
   
   
   
@@ -238,9 +327,9 @@ main(int argc, char* argv[])
 				
 				for(unsigned int subPixel=0; subPixel < width5; subPixel+=1)
 				{
-					Line[3*subPixel+pixel]   = value;   
-					Line[3*subPixel+pixel+1] = value;    
-					Line[3*subPixel+pixel+2] = value;   				
+					Line[3*subPixel+pixel]   = value*r;   
+					Line[3*subPixel+pixel+1] = value*g;    
+					Line[3*subPixel+pixel+2] = value*b;   				
 							
 
 					// Determine if corner box or not and write in.
@@ -248,34 +337,34 @@ main(int argc, char* argv[])
 						//top left
 						if(line >= 0 && line < cornerSizeV) {
 							if((3*subPixel+pixel) >= 0 && (3*subPixel+pixel) < 3*cornerSizeH) {
-							    Line[3*subPixel+pixel]   = maxCValue;   
-								Line[3*subPixel+pixel+1] = maxCValue;    
-								Line[3*subPixel+pixel+2] = maxCValue; 
+							    Line[3*subPixel+pixel]   = maxCValue*r;   
+								Line[3*subPixel+pixel+1] = maxCValue*g;    
+								Line[3*subPixel+pixel+2] = maxCValue*b; 
 							}
 						}
 						//top right						
 						if(line >= 0 && line < cornerSizeV) {
 							if((3*subPixel+pixel) >= (3*arraySizeX - 3*cornerSizeH) && (3*subPixel+pixel) < 3*arraySizeX) {
-							    Line[3*subPixel+pixel]   = maxCValue;   
-								Line[3*subPixel+pixel+1] = maxCValue;    
-								Line[3*subPixel+pixel+2] = maxCValue; 
+							    Line[3*subPixel+pixel]   = maxCValue*r;   
+								Line[3*subPixel+pixel+1] = maxCValue*g;    
+								Line[3*subPixel+pixel+2] = maxCValue*b; 
 							}
 						}
 
 						//bottom left
 						if(line >= (arraySizeY - cornerSizeV) && line < arraySizeY) {
 							if((3*subPixel+pixel) >= 0 && (3*subPixel+pixel) < 3*cornerSizeH) {
-							    Line[3*subPixel+pixel]   = maxCValue;   
-								Line[3*subPixel+pixel+1] = maxCValue;    
-								Line[3*subPixel+pixel+2] = maxCValue; 
+							    Line[3*subPixel+pixel]   = maxCValue*r;   
+								Line[3*subPixel+pixel+1] = maxCValue*g;    
+								Line[3*subPixel+pixel+2] = maxCValue*b; 
 							}
 						}
 						//bottom right						
 						if(line >= (arraySizeY - cornerSizeV) && line < arraySizeY) {
 							if((3*subPixel+pixel) >= (3*arraySizeX - 3*cornerSizeH) && (3*subPixel+pixel) < 3*arraySizeX) {
-							    Line[3*subPixel+pixel]   = maxCValue;   
-								Line[3*subPixel+pixel+1] = maxCValue;    
-								Line[3*subPixel+pixel+2] = maxCValue; 
+							    Line[3*subPixel+pixel]   = maxCValue*r;   
+								Line[3*subPixel+pixel+1] = maxCValue*g;    
+								Line[3*subPixel+pixel+2] = maxCValue*b; 
 							}
 						}						
 												
@@ -284,9 +373,9 @@ main(int argc, char* argv[])
 					if (center) {
 						if(line >= centerStartTop && line < centerStartTop+centerSizeV) {
 							if((3*subPixel+pixel) >= centerStartLeft && (3*subPixel+pixel) < (centerStartLeft + 3*centerSizeH)) {
-							    Line[3*subPixel+pixel]   = maxCValue;   
-								Line[3*subPixel+pixel+1] = maxCValue;    
-								Line[3*subPixel+pixel+2] = maxCValue; 
+							    Line[3*subPixel+pixel]   = maxCValue*r;   
+								Line[3*subPixel+pixel+1] = maxCValue*g;    
+								Line[3*subPixel+pixel+2] = maxCValue*b; 
 							}
 						}
 						
