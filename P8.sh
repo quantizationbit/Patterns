@@ -2,6 +2,7 @@ set -x
 
 make
 rm -fv *ANSI*tiff *ANSI*jpg
+mkdir p8tiff p8jpg
 
 
 
@@ -135,4 +136,5 @@ convert $pattern -resize 960x540 -quality 90 ${pattern%tiff}jpg
 #rm -fv $pattern
 done
 
-
+mv -fv *ANSI*tiff p8tiff
+mv -fv *ANSI*jpg  p8jpg
