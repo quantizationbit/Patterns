@@ -9,8 +9,10 @@ This tool will generate a 16-bit tiff file with an ANSI and/or Corner/Center Box
 -center turns on a center box with -minC to set the cd/m2 of the center box
 -flip will generate the reversed ANSI pattern8
 -legal will generate a legal range output (RGB) default is full range
--idx <num> will apply the provided integer number in front of the generated filename. Helpful if you're making batches of related patterns.
--r <num> -g <num> -b <num> are optional scale factors to use if you want other than white output. For example to make Cyan colored output use -r 0.0  -g 1.0 -b 1.0.
+-idx <num> will apply the provided integer number in front of the
+generated filename. Helpful if you're making batches of related patterns.
+-r <num> -g <num> -b <num> are optional scale factors to use if you want
+other than white output. For example to make Cyan colored output use -r 0.0  -g 1.0 -b 1.0.
 The file name is generated roughly from the parameter values used.
 ```
 
