@@ -13,6 +13,7 @@ This tool will generate a 16-bit tiff file with an ANSI and/or Corner/Center Box
 generated filename. Helpful if you're making batches of related patterns.
 -r <num> -g <num> -b <num> are optional scale factors to use if you want
 other than white output. For example to make Cyan colored output use -r 0.0  -g 1.0 -b 1.0.
+-2020 will matrix the pixels to Rec 2020 D65 (assuming they are P3D65 to start)
 The file name is generated roughly from the parameter values used.
 ```
 
