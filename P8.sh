@@ -26,6 +26,29 @@ mkdir p8tiff p8jpg
 ./pattern8 -idx 210 -min 0.0 -max 0.0 -maxC  50.0 -center -r 1.0 -g 1.0 -b 0.0
 ./pattern8 -idx 211 -min 0.0 -max 0.0 -maxC 250.0 -center -r 1.0 -g 1.0 -b 0.0
 
+#
+# Hue Test Patterns
+# Rec2020
+# RGBCMY
+./pattern8 -idx 300 -min 0.0 -max 0.0 -maxC  50.0 -center -r 1.0 -g 0.0 -b 0.0 -2020
+./pattern8 -idx 301 -min 0.0 -max 0.0 -maxC 250.0 -center -r 1.0 -g 0.0 -b 0.0 -2020
+
+./pattern8 -idx 302 -min 0.0 -max 0.0 -maxC  50.0 -center -r 0.0 -g 1.0 -b 0.0 -2020
+./pattern8 -idx 303 -min 0.0 -max 0.0 -maxC 250.0 -center -r 0.0 -g 1.0 -b 0.0 -2020
+
+./pattern8 -idx 304 -min 0.0 -max 0.0 -maxC  50.0 -center -r 0.0 -g 0.0 -b 1.0 -2020
+./pattern8 -idx 305 -min 0.0 -max 0.0 -maxC 250.0 -center -r 0.0 -g 0.0 -b 1.0 -2020
+
+./pattern8 -idx 306 -min 0.0 -max 0.0 -maxC  50.0 -center -r 0.0 -g 1.0 -b 1.0 -2020
+./pattern8 -idx 307 -min 0.0 -max 0.0 -maxC 250.0 -center -r 0.0 -g 1.0 -b 1.0 -2020
+
+./pattern8 -idx 308 -min 0.0 -max 0.0 -maxC  50.0 -center -r 1.0 -g 0.0 -b 1.0 -2020
+./pattern8 -idx 309 -min 0.0 -max 0.0 -maxC 250.0 -center -r 1.0 -g 0.0 -b 1.0 -2020
+
+./pattern8 -idx 310 -min 0.0 -max 0.0 -maxC  50.0 -center -r 1.0 -g 1.0 -b 0.0 -2020
+./pattern8 -idx 311 -min 0.0 -max 0.0 -maxC 250.0 -center -r 1.0 -g 1.0 -b 0.0 -2020
+
+
 
 
 #
