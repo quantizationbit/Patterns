@@ -400,17 +400,23 @@ if(indexF) {
 					  { 0,	0,	0,	1} };
 					*/
 					if(R2020) {
-					    Line[3*subPixel+pixel]   =  0.753833*Line[3*subPixel+pixel] +\
-													0.198597*Line[3*subPixel+pixel+1] +\
-													0.0475696*Line[3*subPixel+pixel+2];
+						float red, grn, blu;
+					    red   = 0.753833*Line[3*subPixel+pixel] +\
+								0.198597*Line[3*subPixel+pixel+1] +\
+								0.0475696*Line[3*subPixel+pixel+2];
 
-					    Line[3*subPixel+pixel+1] =  0.0457438*Line[3*subPixel+pixel] +\
-													0.941778*Line[3*subPixel+pixel+1] +\
-													0.0124789*Line[3*subPixel+pixel+2];
+					    grn =   0.0457438*Line[3*subPixel+pixel] +\
+								0.941778*Line[3*subPixel+pixel+1] +\
+								0.0124789*Line[3*subPixel+pixel+2];
 													
-					    Line[3*subPixel+pixel+2] =  -0.00121034*Line[3*subPixel+pixel] +\
-													0.0176017*Line[3*subPixel+pixel+1] +\
-													0.983608*Line[3*subPixel+pixel+2];
+					    blu =  -0.00121034*Line[3*subPixel+pixel] +\
+								0.0176017*Line[3*subPixel+pixel+1] +\
+								0.983608*Line[3*subPixel+pixel+2];
+						if(blu < 0.0)blu = 0;
+						
+					    Line[3*subPixel+pixel]   = (unsigned short)(red+0.5);   
+						Line[3*subPixel+pixel+1] = (unsigned short)(grn+0.5);     
+						Line[3*subPixel+pixel+2] = (unsigned short)(blu+0.5);    
 					}
 
 
