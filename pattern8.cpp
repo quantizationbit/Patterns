@@ -47,6 +47,7 @@ using namespace std;
   bool legal = false;
   bool corner = false;
   bool center = false;
+  bool R2020  = false;
   float area = 0.1; // 10%
   unsigned short centerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/9) + 0.5);
   unsigned short cornerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/36.0) + 0.5);
@@ -141,6 +142,10 @@ main(int argc, char* argv[])
 					printf("Flip: %d\n",center);  		     
 		     }	
 
+		     if(strcmp(argv[arg],"-2020")==0) {
+					R2020=true;		 
+					printf("2020 Matrix: %d\n",R2020);  		     
+		     }
 		          		     		     	     
 	     arg++;
 	     }
@@ -278,6 +283,9 @@ if(indexF) {
 }  
   
   
+  if(R2020) {
+	  sprintf(tifName + strlen(tifName)-5, "_2020.tiff");
+  }
   
      
 
@@ -381,6 +389,29 @@ if(indexF) {
 						
 					}
 
+					//
+					// P3D65 to 2020 D65 Matrix
+					//
+					/*
+					P3 D65 to 2020 D65: (transpose to use)
+					{ { 0.753833,	0.0457438,	-0.00121034,	0},
+					  { 0.198597,	0.941778,	0.0176017,	0},
+					  { 0.0475696,	0.0124789,	0.983608,	0},
+					  { 0,	0,	0,	1} };
+					*/
+					if(R2020) {
+					    Line[3*subPixel+pixel]   =  0.753833*Line[3*subPixel+pixel] +\
+													0.198597*Line[3*subPixel+pixel+1] +\
+													0.0475696*Line[3*subPixel+pixel+2];
+
+					    Line[3*subPixel+pixel+1] =  0.0457438*Line[3*subPixel+pixel] +\
+													0.941778*Line[3*subPixel+pixel+1] +\
+													0.0124789*Line[3*subPixel+pixel+2];
+													
+					    Line[3*subPixel+pixel+2] =  -0.00121034*Line[3*subPixel+pixel] +\
+													0.0176017*Line[3*subPixel+pixel+1] +\
+													0.983608*Line[3*subPixel+pixel+2];
+					}
 
 
 				}
