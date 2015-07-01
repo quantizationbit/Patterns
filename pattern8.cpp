@@ -71,7 +71,7 @@ using namespace std;
   
 
 
-main(int argc, char* argv[])
+int main(int argc, char* argv[])
 { 
 		
 	     //Process Args:
@@ -400,26 +400,59 @@ if(indexF) {
 					  { 0,	0,	0,	1} };
 					*/
 					if(R2020) {
-						float red, grn, blu;
-					    red   = 0.753833*Line[3*subPixel+pixel] +\
-								0.198597*Line[3*subPixel+pixel+1] +\
-								0.0475696*Line[3*subPixel+pixel+2];
-
-					    grn =   0.0457438*Line[3*subPixel+pixel] +\
-								0.941778*Line[3*subPixel+pixel+1] +\
-								0.0124789*Line[3*subPixel+pixel+2];
-													
-					    blu =  -0.00121034*Line[3*subPixel+pixel] +\
-								0.0176017*Line[3*subPixel+pixel+1] +\
-								0.983608*Line[3*subPixel+pixel+2];
-						if(blu < 0.0)blu = 0;
 						
-					    Line[3*subPixel+pixel]   = (unsigned short)(red+0.5);   
-						Line[3*subPixel+pixel+1] = (unsigned short)(grn+0.5);     
-						Line[3*subPixel+pixel+2] = (unsigned short)(blu+0.5);    
+						 if (legal) {
+							 float range = 60160.0 - 4096.0;
+							 
+							float red, grn, blu;
+							float redLin = PQ10000_f((Line[3*subPixel+pixel]-4096.0)/range);
+							float grnLin = PQ10000_f((Line[3*subPixel+pixel+1]-4096.0)/range);
+							float bluLin = PQ10000_f((Line[3*subPixel+pixel+2]-4096.0)/range);
+							
+						    red   = 0.753833*redLin +\
+									0.198597*grnLin +\
+									0.0475696*bluLin;
+	
+						    grn =   0.0457438*redLin +\
+									0.941778*grnLin +\
+									0.0124789*bluLin;
+														
+						    blu =  -0.00121034*redLin +\
+									0.0176017*grnLin +\
+									0.983608*bluLin;
+									
+							if(blu < 0.0)blu = 0;
+							
+						    Line[3*subPixel+pixel]   = (unsigned short)(PQ10000_r(red)*range+0.5) + 4096;   
+							Line[3*subPixel+pixel+1] = (unsigned short)(PQ10000_r(grn)*range+0.5) + 4096;    
+							Line[3*subPixel+pixel+2] = (unsigned short)(PQ10000_r(blu)*range+0.5) + 4096;
+													 
+						 } else {
+							float red, grn, blu;
+							float redLin = PQ10000_f(Line[3*subPixel+pixel]/65535.0);
+							float grnLin = PQ10000_f(Line[3*subPixel+pixel+1]/65535.0);
+							float bluLin = PQ10000_f(Line[3*subPixel+pixel+2]/65535.0);
+							
+						    red   = 0.753833*redLin +\
+									0.198597*grnLin +\
+									0.0475696*bluLin;
+	
+						    grn =   0.0457438*redLin +\
+									0.941778*grnLin +\
+									0.0124789*bluLin;
+														
+						    blu =  -0.00121034*redLin +\
+									0.0176017*grnLin +\
+									0.983608*bluLin;
+									
+							if(blu < 0.0)blu = 0;
+							
+						    Line[3*subPixel+pixel]   = (unsigned short)(PQ10000_r(red)*65535.0+0.5);   
+							Line[3*subPixel+pixel+1] = (unsigned short)(PQ10000_r(grn)*65535.0+0.5);     
+							Line[3*subPixel+pixel+2] = (unsigned short)(PQ10000_r(blu)*65535.0+0.5);    
+						
+						 }
 					}
-
-
 				}
 				
 				if(value == minValue) {

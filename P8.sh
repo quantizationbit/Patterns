@@ -4,6 +4,27 @@ make
 rm -fv *ANSI*tiff *ANSI*jpg
 mkdir p8tiff p8jpg
 
+
+#
+# Hue Test Patterns
+#
+# RGBCMY
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner 
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 1.0 -g 0.0 -b 0.0
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 0.0 -g 1.0 -b 0.0
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 0.0 -g 0.0 -b 1.0
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 0.0 -g 1.0 -b 1.0
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 1.0 -g 0.0 -b 1.0
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 1.0 -g 1.0 -b 0.0
+
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 1.0 -g 0.0 -b 0.0 -2020
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 0.0 -g 1.0 -b 0.0 -2020
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 0.0 -g 0.0 -b 1.0 -2020
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 0.0 -g 1.0 -b 1.0 -2020
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 1.0 -g 0.0 -b 1.0 -2020
+./pattern8 -min 0.1 -max 1.0 -maxC  800.0 -corner -r 1.0 -g 1.0 -b 0.0 -2020
+
+
 #
 # Hue Test Patterns
 #
