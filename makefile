@@ -1,7 +1,7 @@
 
 
 	
-all: pattern pattern2 pattern3 pattern4 pattern5 pattern6 pattern7 pattern8
+all: pattern pattern2 pattern3 pattern4 pattern5 pattern6 pattern7 pattern8 pattern9
       
 pattern : pattern.cpp
 	g++ -O3 pattern.cpp -o pattern -ltiff
@@ -27,7 +27,10 @@ pattern7 : pattern7.cpp
 	
 pattern8 : pattern8.cpp
 	g++ -O3 pattern8.cpp -o pattern8  -ltiff
-				
+
+pattern9 : pattern9.cpp
+	g++ -O3 pattern9.cpp -o pattern9  -ltiff
+	
 clean : 
-	rm -v pattern pattern2 pattern3 pattern4 pattern5 pattern6 pattern7 pattern8
+	rm -v pattern pattern2 pattern3 pattern4 pattern5 pattern6 pattern7 pattern8 pattern9
   
