@@ -31,4 +31,37 @@ rm -fv *STEP*tiff *STEP*jpg
 
 
 
+# Bright Red (with weak green)
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 1.0 -g 0.1 -b 0.0
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 1.0 -g 0.01 -b 0.0
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 1.0 -g 0.001 -b 0.0
+
+# Bright Blue (with weak green)
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 0.0 -g 0.1 -b 1.0
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 0.0 -g 0.01 -b 1.0
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 0.0 -g 0.001 -b 1.0
+
+
+# Bright Blue (with weak Red)
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 0.1 -g 0.0 -b 1.0
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 0.01 -g 0.0 -b 1.0
+./pattern9 -min 0.0 -max 4000.0 -maxC 1.0 -r 0.001 -g 0.0 -b 1.0
+
+
+
+# Bright Red (with weak green)
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 1.0 -g 0.1 -b 0.0
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 1.0 -g 0.01 -b 0.0
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 1.0 -g 0.001 -b 0.0
+
+# Bright Blue (with weak green)
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 0.0 -g 0.1 -b 1.0
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 0.0 -g 0.01 -b 1.0
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 0.0 -g 0.001 -b 1.0
+
+
+# Bright Blue (with weak Red)
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 0.1 -g 0.0 -b 1.0
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 0.01 -g 0.0 -b 1.0
+./pattern9 -min 0.0 -max 1000.0 -maxC 1.0 -r 0.001 -g 0.0 -b 1.0
 
