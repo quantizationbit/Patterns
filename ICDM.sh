@@ -55,20 +55,20 @@ cd ICDM
 
 # Color Volume Patterns
 
-../pattern8 -idx 1000  -min 250.0 -max 500.0 -maxC  1000.0 -r 1.0 -g 0.0 -b 0.001 -corner  -2020 &
-../pattern8 -idx 1001  -min 250.0 -max 500.0 -maxC  1000.0 -r 0.001 -g 0.0 -b 1.0 -corner  -2020 &
-../pattern8 -idx 1002  -min 250.0 -max 500.0 -maxC  1000.0 -r 0.0 -g 1.0 -b 0.001 -corner  -2020 &
-../pattern8 -idx 1003  -min 250.0 -max 500.0 -maxC  1000.0 -r 0.001 -g 1.0 -b 0.0 -corner  -2020 &
+../pattern8 -idx 1000  -min 250.0 -max 500.0 -maxC  1000.0 -r 1.0 -g 0.0 -b 0.005 -corner  -2020 &
+../pattern8 -idx 1001  -min 250.0 -max 500.0 -maxC  1000.0 -r 0.005 -g 0.0 -b 1.0 -corner  -2020 &
+../pattern8 -idx 1002  -min 250.0 -max 500.0 -maxC  1000.0 -r 0.0 -g 1.0 -b 0.005 -corner  -2020 &
+../pattern8 -idx 1003  -min 250.0 -max 500.0 -maxC  1000.0 -r 0.005 -g 1.0 -b 0.0 -corner  -2020 &
 
-../pattern8 -idx 2000  -min 150.0 -max 300.0 -maxC  540.0 -r 1.0 -g 0.0 -b 0.001 -corner  -2020 &
-../pattern8 -idx 2001  -min 150.0 -max 300.0 -maxC  540.0 -r 0.001 -g 0.0 -b 1.0 -corner  -2020 &
-../pattern8 -idx 2002  -min 150.0 -max 300.0 -maxC  540.0 -r 0.0 -g 1.0 -b 0.001 -corner  -2020 &
-../pattern8 -idx 2003  -min 150.0 -max 300.0 -maxC  540.0 -r 0.001 -g 1.0 -b 0.0 -corner  -2020 &
+../pattern8 -idx 2000  -min 150.0 -max 300.0 -maxC  540.0 -r 1.0 -g 0.0 -b 0.005 -corner  -2020 &
+../pattern8 -idx 2001  -min 150.0 -max 300.0 -maxC  540.0 -r 0.005 -g 0.0 -b 1.0 -corner  -2020 &
+../pattern8 -idx 2002  -min 150.0 -max 300.0 -maxC  540.0 -r 0.0 -g 1.0 -b 0.005 -corner  -2020 &
+../pattern8 -idx 2003  -min 150.0 -max 300.0 -maxC  540.0 -r 0.005 -g 1.0 -b 0.0 -corner  -2020 &
 
-../pattern8 -idx 3000  -min 250.0 -max 1000.0 -maxC  4000.0 -r 1.0 -g 0.0 -b 0.001 -corner  -2020 &
-../pattern8 -idx 3001  -min 250.0 -max 1000.0 -maxC  4000.0 -r 0.001 -g 0.0 -b 1.0 -corner  -2020 &
-../pattern8 -idx 3002  -min 250.0 -max 1000.0 -maxC  4000.0 -r 0.0 -g 1.0 -b 0.001 -corner  -2020 &
-../pattern8 -idx 3003  -min 250.0 -max 1000.0 -maxC  4000.0 -r 0.001 -g 1.0 -b 0.0 -corner  -2020 
+../pattern8 -idx 3000  -min 250.0 -max 1000.0 -maxC  4000.0 -r 1.0 -g 0.0 -b 0.005 -corner  -2020 &
+../pattern8 -idx 3001  -min 250.0 -max 1000.0 -maxC  4000.0 -r 0.005 -g 0.0 -b 1.0 -corner  -2020 &
+../pattern8 -idx 3002  -min 250.0 -max 1000.0 -maxC  4000.0 -r 0.0 -g 1.0 -b 0.005 -corner  -2020 &
+../pattern8 -idx 3003  -min 250.0 -max 1000.0 -maxC  4000.0 -r 0.005 -g 1.0 -b 0.0 -corner  -2020 
 
 
 
@@ -87,7 +87,7 @@ LREFDISPLAY=$CLIP
 
 
 
-source="1001_ANSI5x5_250.000__500.000_CORNER_1000.000_r_0.001_g_0.000_b_1.000_2020.tiff"
+source="1001_ANSI5x5_250.000__500.000_CORNER_1000.000_r_0.005_g_0.000_b_1.000_2020.tiff"
 HLGTEST
 mv -fv "VolumeLimit"$source".tif" HLG/
 
