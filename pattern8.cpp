@@ -182,16 +182,16 @@ if(indexF) {
 
   if(legal) {
 	  if(flip) {
-		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff",idx, minNits,maxNits,r,g,b);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_r_%.3f_g_%.3f_b_%.3f.tiff",idx, minNits,maxNits,r,g,b);
 	  } else {
-		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,r,g,b);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,r,g,b);
 	  } 
    } else  {
 
 	  if(flip) {
-		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,r,g,b);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,r,g,b);
 	  } else {
-		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,r,g,b);
+		  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,r,g,b);
 	  }
    }
    
@@ -199,16 +199,16 @@ if(indexF) {
   if(corner) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  }
 	   }	  
   }
@@ -216,16 +216,16 @@ if(indexF) {
   if(center) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"%03d_ANSI5x5_%.3f__%.3f_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", idx, minNits,maxNits,maxCNits,r,g,b);
 		  }
 	   }	  
   }	
@@ -233,16 +233,16 @@ if(indexF) {
   
   if(legal) {
 	  if(flip) {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,r,g,b);
 	  } else {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,r,g,b);
 	  } 
    } else  {
 
 	  if(flip) {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,r,g,b);
 	  } else {
-		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,r,g,b);
+		  sprintf(tifName,"ANSI5x5_%.3f__%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,r,g,b);
 	  }
    }
    
@@ -250,16 +250,16 @@ if(indexF) {
   if(corner) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CORNER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CORNER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  }
 	   }	  
   }
@@ -267,16 +267,16 @@ if(indexF) {
   if(center) {
 	  if(legal) {
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_FLIP_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_LEGAL_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  } 
 	   } else  {
 	
 		  if(flip) {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_FLIP_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  } else {
-			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CENTER_%.1f_r_%.1f_g_%.1f_b_%.1f.tiff", minNits,maxNits,maxCNits,r,g,b);
+			  sprintf(tifName,"ANSI5x5_%.3f__%.3f_CENTER_%.3f_r_%.3f_g_%.3f_b_%.3f.tiff", minNits,maxNits,maxCNits,r,g,b);
 		  }
 	   }	  
   }
