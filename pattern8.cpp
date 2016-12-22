@@ -1,3 +1,27 @@
+/*
+ * pattern8.cpp
+ * 
+ * Copyright 2016 Quantization Bit <quantizationbit@gmail.com>
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * 
+ * 
+ */
+
+
 // set up for 12 bits 
 // ASSUMES 3840x2160 ONLY
 
@@ -49,12 +73,7 @@ using namespace std;
   bool center = false;
   bool R2020  = false;
   float area = 0.1; // 10%
-  unsigned short centerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/9) + 0.5);
-  unsigned short cornerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/36.0) + 0.5);
-  unsigned short centerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/16) + 0.5);
-  unsigned short cornerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/64.0) + 0.5);
-  unsigned short centerStartTop = numStrips/2 - centerSizeV/2;
-  unsigned short centerStartLeft = stripsize/4 - 3*centerSizeH/2;
+
   
   int idx;
   bool indexF = false;
@@ -146,10 +165,23 @@ int main(int argc, char* argv[])
 					R2020=true;		 
 					printf("2020 Matrix: %d\n",R2020);  		     
 		     }
-		          		     		     	     
-	     arg++;
+		
+		     if(strcmp(argv[arg],"-percent")==0) {
+					arg++;
+					if(arg < argc)area=atof(argv[arg])/100.0;		 
+					printf("box area: %f\n",area*100.0);   	 
+		     }
+		
+		    arg++;
 	     }
 	     
+
+  unsigned short centerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/9) + 0.5);
+  unsigned short cornerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/36.0) + 0.5);
+  unsigned short centerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/16) + 0.5);
+  unsigned short cornerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/64.0) + 0.5);
+  unsigned short centerStartTop = numStrips/2 - centerSizeV/2;
+  unsigned short centerStartLeft = stripsize/4 - 3*centerSizeH/2;
  
 	 
 	 if (legal) {
