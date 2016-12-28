@@ -66,6 +66,10 @@ $FFMPEG -y \
 #ENCODE
 #exit
 
+# Calculation ideas
+# http://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks
+#
+
 
 rm -rfv SID
 mkdir SID
