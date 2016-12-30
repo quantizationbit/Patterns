@@ -51,10 +51,10 @@ using namespace std;
   TIFF* tif;
   
   // hard code 1920x1080
-  unsigned short horiz = 3840;
+  unsigned short horiz = 1920;
   unsigned short stripsize = horiz*2*3;
   unsigned short pixelStart = 0;
-  unsigned short numStrips = 2160;
+  unsigned short numStrips = 1080;
   unsigned short height5 = numStrips/5;
   unsigned short width5 = horiz/5;
   unsigned short value = 16*256;
