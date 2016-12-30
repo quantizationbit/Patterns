@@ -7,8 +7,14 @@ X264=$EDRHOME/src/x264/x264
 #$X264 --fullhelp
 #exit
 
-rm sid.s64
+rm sid.264
 $X264 --range tv --colorprim bt2020 --transfer smpte2084 --colormatrix bt2020nc --input-fmt yuv420p10le --input-depth 10 --input-res 3840x2160 --input-range tv --fps 23.976 --profile high10 --crf 0  -o sid.264 ./SID/SID.yuv
+
+$FFMPEG -y -f lavfi -i aevalsrc=0:0:0:0:0:0::d=300  \
+ -ar 48000 \
+ -vn -ac 6 -acodec aac -cutoff 18000 -ab 768k \
+  audio.aac
+  
 
 rm -fv sid.mp4
 $FFMPEG -y \

@@ -61,20 +61,8 @@ $FFMPEG -y \
 }	
 
 
-#main
-#cd SID
-#ENCODE
-#exit
+function CONTRAST {
 
-# Calculation ideas
-# http://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks
-#
-
-
-rm -rfv SID
-mkdir SID
-cd SID
-rm -fv SID.yuv
 
 ../pattern8  -min 0.0 -max 0.0  -2020; mv ANSI*.tiff x.tiff
 convert x.tiff -gravity Center  -pointsize 200 -fill 'rgb(35,0,0)' -annotate 0 'ANSI 0,[0.01, 0.02, 0.05, 0.1]\n(no corner)' ANSI.tiff; rm -fv x.tiff;ctlrender -force -ctl $EDRHOME/ACES/CTL/null.ctl ANSI.tiff -format tiff16 x.tiff;mv -fv x.tiff ANSI.tiff;YUVBuild
@@ -132,8 +120,116 @@ convert x.tiff -gravity Center  -pointsize 200 -fill 'rgb(35,0,0)' -annotate 0 '
 
 ENCODE
 
+}
+
+
+
+#misc
+#cd SID
+#ENCODE
+#exit
+
+# Calculation ideas
+# http://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks
+#
+
+#######
+
+#
+# Build Contrast:
+#
+#rm -rfv SID
+#mkdir SID
+#cd SID
+#rm -fv SID.yuv
+
+#CONTRAST
+
+#cd ..
+#ls -lt SID
+
+#
+# Build Color Volume
+#
+rm -rfv CV
+mkdir CV
+cd CV
+rm -fv SID.yuv
+rm -fv *.tiff
+NUM="0"
+
+MAX="5"
+while [ `bc -l <<< "$MAX < 4000"` -eq 1 ]
+do
+../pattern9 -min 0.0 -max $MAX -maxC 1.0 -legal -r 1.0 -g 0.01 -b 0.0
+$EDRHOME/Tools/YUV/tif2yuv *.tiff B10 2020 HD1920  -o SID.yuv
+rm -fv *.tiff
+MAX=`bc <<< 'scale=6;'$MAX' + '$MAX'*0.0075'`
+NUM=`bc <<< $NUM'+1'`
+done
+
+
+MAX="5"
+while [ `bc -l <<< "$MAX < 4000"` -eq 1 ]
+do
+../pattern9 -min 0.0 -max $MAX -maxC 1.0 -legal -r 0.01 -g 0.0 -b 1.0
+$EDRHOME/Tools/YUV/tif2yuv *.tiff B10 2020 HD1920 -o SID.yuv
+rm -fv *.tiff
+MAX=`bc <<< 'scale=6;'$MAX' + '$MAX'*0.0075'`
+NUM=`bc <<< $NUM'+1'`
+done
+
+MAX="5"
+while [ `bc -l <<< "$MAX < 4000"` -eq 1 ]
+do
+../pattern9 -min 0.0 -max $MAX -maxC 1.0 -legal -r 0.0 -g 1.0 -b 0.01
+$EDRHOME/Tools/YUV/tif2yuv *.tiff B10 2020 HD1920 -o SID.yuv
+rm -fv *.tiff
+MAX=`bc <<< 'scale=6;'$MAX' + '$MAX'*0.0075'`
+NUM=`bc <<< $NUM'+1'`
+done
+
+
+
+FFMPEG=$EDRHOME/src/ffmpeg-build-script/workspace/bin/ffmpeg
+#FFMPEG=/usr/bin/ffmpeg
+X264=$EDRHOME/src/x264/x264
+
+#$X264 --fullhelp
+#exit
+
+rm cv.264
+$X264 --range tv --colorprim bt2020 --transfer smpte2084 --colormatrix bt2020nc --input-fmt yuv420p10le --input-depth 10 --input-res 1920x1080 --input-range tv --fps 23.976 --profile high10 --crf 0  -o cv.264 SID.yuv
+
+$FFMPEG -y -f lavfi -i aevalsrc=0:0:0:0:0:0::d=300  \
+ -ar 48000 \
+ -vn -ac 6 -acodec aac -cutoff 18000 -ab 768k \
+  audio.aac
+  
+
+rm -fv cv.mp4
+$FFMPEG -y \
+  -i cv.264 \
+  -i audio.aac \
+  -c copy "cv.mp4"
+  
+ wine $EDRHOME/youtube/hdr_metadata/windows/32bits/mkvmerge.exe \
+      -o cv.mkv\
+      --colour-matrix 0:9 \
+      --colour-range 0:1 \
+      --colour-transfer-characteristics 0:16 \
+      --colour-primaries 0:9 \
+      --max-content-light 0:4000 \
+      --max-frame-light 0:399 \
+      --max-luminance 0:4000 \
+      --min-luminance 0:0.005 \
+      --chromaticity-coordinates 0:0.68,0.32,0.265,0.690,0.15,0.06 \
+      --white-colour-coordinates 0:0.3127,0.3290 \
+      cv.mp4   
+
+
 cd ..
-ls -lt SID
+ls -lt CV
 
 exit
 
