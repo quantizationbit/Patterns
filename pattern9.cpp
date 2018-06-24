@@ -52,12 +52,8 @@ using namespace std;
   
   // hard code 1920x1080
   unsigned short horiz = 1920;
-  unsigned short stripsize = horiz*2*3;
-  unsigned short pixelStart = 0;
   unsigned short numStrips = 1080;
-  unsigned short height5 = numStrips/5;
-  unsigned short width5 = horiz/5;
-  unsigned short value = 16*256;
+  unsigned short numBands = 16;
   double minNits = 0.0;
   double maxNits = 10000.0;
   double maxCNits= 10000.0;
@@ -71,14 +67,9 @@ using namespace std;
   bool corner = false;
   bool center = false;
   bool R2020  = true;
-  float area = 0.1; // 10%
-  float safe = 0.1; // safe title percent
-  unsigned short centerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/9) + 0.5);
-  unsigned short cornerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/36.0) + 0.5);
-  unsigned short centerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/16) + 0.5);
-  unsigned short cornerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/64.0) + 0.5);
-  unsigned short centerStartTop = numStrips/2 - centerSizeV/2;
-  unsigned short centerStartLeft = stripsize/4 - 3*centerSizeH/2;
+  float area = 0.05; // 10%
+  float safe = 0.025; // safe title percent
+
   
   int idx;
   bool indexF = false;
@@ -126,7 +117,13 @@ int main(int argc, char* argv[])
 					if(arg < argc)maxCNits=atof(argv[arg]);		 
 					printf("max nits: %f\n",maxCNits);   	
 		     }	
-		     
+
+		     if(strcmp(argv[arg],"-bands")==0) {
+					arg++;
+					if(arg < argc)numBands=atoi(argv[arg]);	
+					printf("bands: %d\n",numBands);	 
+			 }
+			     
 		     if(strcmp(argv[arg],"-legal")==0) {
 					legal=true;		 
 					printf("Flip: %d\n",legal);  		     
@@ -148,13 +145,35 @@ int main(int argc, char* argv[])
 					arg++;
 					if(arg < argc)b=atof(argv[arg]);		 
 					printf("b scale factor: %f\n",b);   	
-		     }		     
-		     
+		     }	
+		     	     
+		     if(strcmp(argv[arg],"-2K")==0) {
+					horiz=2048;
+					numStrips=1080;		 
+					printf("2K\n",b);   	
+		     }			     
+		     if(strcmp(argv[arg],"-4K")==0) {
+					horiz=4096;
+					numStrips=2160;		 
+					printf("4K\n",b);   	
+		     }			     
 
 		          		     		     	     
 	     arg++;
 	     }
 	     
+
+  unsigned short stripsize = horiz*2*3;
+  unsigned short pixelStart = 0;
+  unsigned short height5 = numStrips/5;
+  unsigned short width5 = horiz/5;
+  unsigned short value = 16*256;
+  unsigned short centerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/9) + 0.5);
+  unsigned short cornerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/36.0) + 0.5);
+  unsigned short centerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/16) + 0.5);
+  unsigned short cornerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/64.0) + 0.5);
+  unsigned short centerStartTop = numStrips/2 - centerSizeV/2;
+  unsigned short centerStartLeft = stripsize/4 - 3*centerSizeH/2;
  
 	 
 	 if (legal) {
@@ -329,10 +348,10 @@ if(indexF) {
 			{
 				if(pixel > safe*3.0*arraySizeX && pixel < 3*arraySizeX - safe*3.0*arraySizeX)
 				{
-					value = int(16.0*(pixel-safe*3.0*arraySizeX)/(3*arraySizeX - 2.0*safe*3.0*arraySizeX)) * float(maxValue-minValue)/15.0;
-					Line[pixel]   = value;   
-					Line[pixel+1] = value;    
-					Line[pixel+2] = value;   				
+					value = (int)((float)numBands*(pixel-safe*3.0*arraySizeX)/(3*arraySizeX - 2.0*safe*3.0*arraySizeX)) * (float)(maxNits-minNits)/(float)(numBands-1);
+					Line[pixel]   = int(PQ10000_r(value/10000.0)*65535.0 + 0.5);  
+					Line[pixel+1] = int(PQ10000_r(value/10000.0)*65535.0 + 0.5);    
+					Line[pixel+2] = int(PQ10000_r(value/10000.0)*65535.0 + 0.5);   				
 			    } else 
 			    {
 					Line[pixel]   = maxCValue;   
