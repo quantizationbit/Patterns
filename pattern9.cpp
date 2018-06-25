@@ -66,7 +66,7 @@ using namespace std;
   bool legal = false;
   bool corner = false;
   bool center = false;
-  bool R2020  = true;
+  bool R2020  = false;
   float area = 0.05; // 10%
   float safe = 0.025; // safe title percent
 
@@ -158,7 +158,10 @@ int main(int argc, char* argv[])
 					printf("4K\n",b);   	
 		     }			     
 
-		          		     		     	     
+		     if(strcmp(argv[arg],"-2020")==0) {
+					R2020=true;		 
+					printf("2020 Matrix: %d\n",R2020);  		     
+		     }		          		     		     	     
 	     arg++;
 	     }
 	     
@@ -349,9 +352,9 @@ if(indexF) {
 				if(pixel > safe*3.0*arraySizeX && pixel < 3*arraySizeX - safe*3.0*arraySizeX)
 				{
 					value = (int)((float)numBands*(pixel-safe*3.0*arraySizeX)/(3*arraySizeX - 2.0*safe*3.0*arraySizeX)) * (float)(maxNits-minNits)/(float)(numBands-1);
-					Line[pixel]   = int(PQ10000_r(value/10000.0)*65535.0 + 0.5);  
-					Line[pixel+1] = int(PQ10000_r(value/10000.0)*65535.0 + 0.5);    
-					Line[pixel+2] = int(PQ10000_r(value/10000.0)*65535.0 + 0.5);   				
+					Line[pixel]   = int(PQ10000_r(r*value/10000.0)*65535.0 + 0.5);  
+					Line[pixel+1] = int(PQ10000_r(g*value/10000.0)*65535.0 + 0.5);    
+					Line[pixel+2] = int(PQ10000_r(b*value/10000.0)*65535.0 + 0.5);   				
 			    } else 
 			    {
 					Line[pixel]   = maxCValue;   
