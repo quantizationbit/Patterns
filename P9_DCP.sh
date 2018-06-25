@@ -62,37 +62,45 @@ ramp.tiff -format tiff16 XYZPQ.tiff
 #Main
 set -x
 make
-rm -rfv ramp
-mkdir ramp
+rm -rfv ramp RampP3
+mkdir ramp RampP3
 
 
 color="-r 1.0 -g 1.0 -b 1.0"
 Ramp
 mv -fv XYZPQ.tiff ramp/0000.tiff
+mv -fv ramp.tiff RampP3/0000.tiff
 
 color="-r 1.0 -g 0.0 -b 0.0"
 Ramp
 mv -fv XYZPQ.tiff ramp/0001.tiff
+mv -fv ramp.tiff RampP3/0001.tiff
+
 
 color="-r 0.0 -g 1.0 -b 0.0"
 Ramp
 mv -fv XYZPQ.tiff ramp/0002.tiff
+mv -fv ramp.tiff RampP3/0002.tiff
 
 color="-r 0.0 -g 0.0 -b 1.0"
 Ramp
 mv -fv XYZPQ.tiff ramp/0003.tiff
+mv -fv ramp.tiff RampP3/0003.tiff
 
 color="-r 0.0 -g 1.0 -b 1.0"
 Ramp
 mv -fv XYZPQ.tiff ramp/0004.tiff
+mv -fv ramp.tiff RampP3/0004.tiff
 
 color="-r 1.0 -g 0.0 -b 1.0"
 Ramp
 mv -fv XYZPQ.tiff ramp/0005.tiff
+mv -fv ramp.tiff RampP3/0005.tiff
 
 color="-r 1.0 -g 1.0 -b 0.0"
 Ramp
 mv -fv XYZPQ.tiff ramp/0006.tiff
+mv -fv ramp.tiff RampP3/0006.tiff
 
 
 
@@ -116,6 +124,17 @@ opendcp_xml \
 --digest PQRamp4K --kind test -t "4K PQ Ramp"
 
 cd ..
+
+rm -rfv PQRampDCP RampXYZ
+mv DCP PQRampDCP
+mv ramp RampXYZ
+
+rm -fv PQRampDCP.zip RampXYZ.zip RampP3.zip
+
+zip -r PQRampDCP.zip PQRampDCP
+zip -r RampXYZ.zip RampXYZ
+zip -r RampP3.zip RampP3
+
    
 
 exit
