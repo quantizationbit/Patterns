@@ -97,9 +97,10 @@ main(int argc, char* argv[])
 			for (unsigned int pixel = 0; pixel < (3*arraySizeX);pixel+=3)
 			{
 				float r = sqrt(pow(line - arraySizeY/2.,2.) + pow((int)(pixel/3.) - arraySizeX/2.,2.));
-				float f = r/(2.*(((float)F/(float)frame)*(4096.-2160.)+2160.));
-				float l = (nits/10000.)*pow(sin(2.*PI*f*r),2.);
-				float v = PQ10000_r(l);
+				float f = r/((((float)F/(float)frame)*(4096.-2160.)+2160.));
+				float v = (PQ10000_r(nits/10000.)*(1.-cos(2.*PI*f*r))/2.);
+				//float l = (nits/10000.)*(1.-cos(2.*PI*f*r))/2.);
+				//float v = PQ10000_r(l);
 				
 				
 				//P3 D65 to XYZ: 
