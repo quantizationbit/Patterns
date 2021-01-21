@@ -4,11 +4,11 @@
 set -x
 
 make
-rm -rfv zone
-mkdir zone
+rm -rfv zone tmp
+mkdir zone tmp
 cd zone
 
-../pattern10 -frame 240
+../pattern10 -frame 2
 
 cd ..
 
@@ -16,7 +16,7 @@ rm -rfv j2k DCP
 mkdir j2k DCP
 cd DCP
 
-opendcp_j2k -i ../zone -b 250 -x -p cinema4k -f -t 8 -m ../tmp -o ../j2k
+opendcp_j2k -i ../zone -b 400 -e kakadu -x -p cinema4k -f -t 8 -m ../tmp -o ../j2k
 
 
 opendcp_mxf -i ../j2k -o Zone.mxf
