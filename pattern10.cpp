@@ -31,8 +31,6 @@ using namespace std;
   
   // hard code 3840 x 2160
   unsigned short horiz = 4096;
-  unsigned short stripsize = horiz*2*3;
-  unsigned short pixelStart = 0;
   unsigned short numStrips = 2160;
   unsigned short frame = 5;
   float nits = 300.0; // nits
@@ -55,10 +53,27 @@ main(int argc, char* argv[])
 					printf("frame: %d\n",frame);   	
 		     }  
 
+		     if(strcmp(argv[arg],"-w")==0) {
+					arg++;
+					if(arg < argc)horiz=atoi(argv[arg]);		 
+					printf("width: %d\n",horiz);   	
+		     } 
+		     
+		     if(strcmp(argv[arg],"-h")==0) {
+					arg++;
+					if(arg < argc)numStrips=atoi(argv[arg]);		 
+					printf("height: %d\n",numStrips);   	
+		     } 		     
 	     arg++;
 	     }
   
-
+  unsigned short stripsize = horiz*2*3;
+  unsigned short pixelStart = 0;
+  
+  float wScale = 1.; //4096./horiz;
+  float hScale = 1.; //2160./numStrips;
+  float rScale = sqrt(pow(4096./2.,2)+pow(2160./2.,2))/sqrt(pow(horiz/2.,2)+pow(numStrips/2.,2));
+  printf("rScale = %f\n", rScale);
   
   for (int F = 0; F <= frame;F++)
   {
@@ -96,7 +111,7 @@ main(int argc, char* argv[])
 
 			for (unsigned int pixel = 0; pixel < (3*arraySizeX);pixel+=3)
 			{
-				float r = sqrt(pow(line - arraySizeY/2.,2.) + pow((int)(pixel/3.) - arraySizeX/2.,2.));
+				float r = rScale*sqrt(pow(hScale*(line - arraySizeY/2.),2.) + pow(wScale*((int)(pixel/3.) - arraySizeX/2.),2.));
 				float f = r/((((float)F/(float)frame)*(4096.-2160.)+2160.));
 				float v = (PQ10000_r(nits/10000.)*(1.-cos(2.*PI*f*r))/2.);
 				//float l = (nits/10000.)*(1.-cos(2.*PI*f*r))/2.);
