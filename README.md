@@ -54,7 +54,14 @@ Earlier ramp patterns. They repeat a ramp of values down the image (pattern4 als
 
 **PQ**
 
-Small helper for the PQ transfer function, with -EOTF and -IEOTF options.
+Command line calculator for the PQ transfer function (SMPTE ST 2084, absolute 10000 nit range). It prints one number, with no newline, so it is easy to use in shell scripts.
+
+```
+PQ -IEOTF <nits>    luminance in nits to normalized PQ code value (0 to 1)
+PQ -EOTF <value>    normalized PQ code value (0 to 1) to luminance in nits
+```
+
+Examples: `PQ -IEOTF 100` prints 0.508078, `PQ -IEOTF 203` prints 0.580689, `PQ -IEOTF 1000` prints 0.751827, `PQ -IEOTF 10000` prints 1.000000, and `PQ -EOTF 0.5081` prints about 100.02. A value of 0 prints 0, and a missing or unknown option also prints 0.
 
 
 ## Building
