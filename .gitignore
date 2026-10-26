@@ -1,0 +1,21 @@
+# Allowlist: everything is ignored unless listed below.
+# New test scripts, data, builds and anything else stay out of git (and out of
+# this public repo) by default. To publish a file, add a "!name" line for it.
+# Files that are already tracked stay tracked whatever this file says.
+*
+!*/
+
+!.gitignore
+!README.md
+!makefile
+
+# C pattern programs built by the makefile
+!pattern.cpp
+!pattern[0-9].cpp
+!pattern10.cpp
+!PQ.cpp
+
+# Bit depth animation
+!animation.sh
+!animation/
+!animation/*.png
