@@ -126,7 +126,7 @@ int main(int argc, char* argv[])
 			     
 		     if(strcmp(argv[arg],"-legal")==0) {
 					legal=true;		 
-					printf("Flip: %d\n",legal);  		     
+					printf("Legal: %d\n",legal);  		     
 		     }		  
 		     		     
 		     if(strcmp(argv[arg],"-r")==0) {
@@ -156,12 +156,27 @@ int main(int argc, char* argv[])
 					horiz=4096;
 					numStrips=2160;		 
 					printf("4K\n",b);   	
-		     }			     
+		     }	
+		     if(strcmp(argv[arg],"-UHD")==0) {
+					horiz=3840;
+					numStrips=2160;		 
+					printf("UHD\n",b);   	
+		     }	
+		     
+		     if(strcmp(argv[arg],"-UHD2")==0) {
+					horiz=7680;
+					numStrips=4320;		 
+					printf("UHD2\n",b);   	
+		     }		     		     		     
 
 		     if(strcmp(argv[arg],"-2020")==0) {
 					R2020=true;		 
 					printf("2020 Matrix: %d\n",R2020);  		     
-		     }		          		     		     	     
+		     }
+		     if(strcmp(argv[arg],"-nosafe")==0) {
+					safe=0.0;		 
+					printf("No Safe area\n",R2020);  		     
+		     }		     		          		     		     	     
 	     arg++;
 	     }
 	     
@@ -340,7 +355,11 @@ if(indexF) {
 		TIFFSetField(tif, TIFFTAG_IMAGEWIDTH, arraySizeX);
 		TIFFSetField(tif, TIFFTAG_IMAGELENGTH, arraySizeY);
 		TIFFSetField(tif, TIFFTAG_ROWSPERSTRIP, 1);
-		TIFFSetField(tif, TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_RGB);		
+		TIFFSetField(tif, TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_RGB);	
+        
+        // use code value instead of nits value:
+        minNits = int(PQ10000_r(minNits/10000.0)*65535.0 + 0.5); 
+        maxNits = int(PQ10000_r(maxNits/10000.0)*65535.0 + 0.5); 
 
 		float px, py, d1,d2;
 		for (int line = 0;line < arraySizeY;line+=1)
@@ -351,10 +370,13 @@ if(indexF) {
 			{
 				if(pixel > safe*3.0*arraySizeX && pixel < 3*arraySizeX - safe*3.0*arraySizeX)
 				{
-					value = (int)((float)numBands*(pixel-safe*3.0*arraySizeX)/(3*arraySizeX - 2.0*safe*3.0*arraySizeX)) * (float)(maxNits-minNits)/(float)(numBands-1);
-					Line[pixel]   = int(PQ10000_r(r*value/10000.0)*65535.0 + 0.5);  
-					Line[pixel+1] = int(PQ10000_r(g*value/10000.0)*65535.0 + 0.5);    
-					Line[pixel+2] = int(PQ10000_r(b*value/10000.0)*65535.0 + 0.5);   				
+					value = (int)(minNits + ((int)((float)numBands*(pixel-safe*3.0*arraySizeX)/(3*arraySizeX - 2.0*safe*3.0*arraySizeX)) * (float)(maxNits-minNits)/(numBands-1)));
+					//Line[pixel]   = int(PQ10000_r(r*value/10000.0)*65535.0 + 0.5);  
+					//Line[pixel+1] = int(PQ10000_r(g*value/10000.0)*65535.0 + 0.5);    
+					//Line[pixel+2] = int(PQ10000_r(b*value/10000.0)*65535.0 + 0.5);
+                    Line[pixel]   = r*value;  
+					Line[pixel+1] = g*value;    
+					Line[pixel+2] = b*value;   				
 			    } else 
 			    {
 					Line[pixel]   = maxCValue;   

@@ -9,10 +9,9 @@
  * (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * but WITHOUT ANY WARRANTY; without even the implied wround*arranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
@@ -52,7 +51,7 @@ using namespace std;
   // file pointer for tif
   TIFF* tif;
   
-  // hard code 1920x1080
+  // hard code 3840x2160
   unsigned short horiz = 3840;
   unsigned short stripsize = horiz*2*3;
   unsigned short pixelStart = 0;
@@ -84,6 +83,8 @@ using namespace std;
   float b=1.0;
   
   float percent;
+  
+  float fround = 1.0;
 
   char tifName[] = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.tiff";
 
@@ -180,19 +181,20 @@ int main(int argc, char* argv[])
   unsigned short cornerSizeH = (unsigned short)(sqrt(16*horiz*numStrips*area/36.0) + 0.5);
   unsigned short centerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/16) + 0.5);
   unsigned short cornerSizeV = (unsigned short)(sqrt(9*horiz*numStrips*area/64.0) + 0.5);
+  printf("boxes: %d, %d, -- %d, %d\n", centerSizeH, centerSizeV, cornerSizeH, cornerSizeV);
   unsigned short centerStartTop = numStrips/2 - centerSizeV/2;
   unsigned short centerStartLeft = stripsize/4 - 3*centerSizeH/2;
  
 	 
 	 if (legal) {
 		 float range = 60160.0 - 4096.0;
-		 minValue = (PQ10000_r(minNits/10000.0)*range + 4096.0 + 0.5);  
-		 maxValue = (PQ10000_r(maxNits/10000.0)*range + 4096.0 + 0.5);
-		 maxCValue = (PQ10000_r(maxCNits/10000.0)*range + 4096.0 + 0.5); 		 
+		 minValue = (PQ10000_r(minNits/10000.0)*range + 4096.0 + fround*0.5);  
+		 maxValue = (PQ10000_r(maxNits/10000.0)*range + 4096.0 + fround*0.5);
+		 maxCValue = (PQ10000_r(maxCNits/10000.0)*range + 4096.0 + fround*0.5); 		 
 	 } else {
-		 minValue = (PQ10000_r(minNits/10000.0)*65535.0 + 0.5);  
-		 maxValue = (PQ10000_r(maxNits/10000.0)*65535.0 + 0.5); 
-		 maxCValue = (PQ10000_r(maxCNits/10000.0)*65535.0 + 0.5); 	 
+		 minValue = (PQ10000_r(minNits/10000.0)*65535.0 + fround*0.5);  
+		 maxValue = (PQ10000_r(maxNits/10000.0)*65535.0 + fround*0.5); 
+		 maxCValue = (PQ10000_r(maxCNits/10000.0)*65535.0 + fround*0.5); 	 
 	 }
 	 
 	 
@@ -455,9 +457,9 @@ if(indexF) {
 									
 							if(blu < 0.0)blu = 0;
 							
-						    Line[3*subPixel+pixel]   = (unsigned short)(PQ10000_r(red)*range+0.5) + 4096;   
-							Line[3*subPixel+pixel+1] = (unsigned short)(PQ10000_r(grn)*range+0.5) + 4096;    
-							Line[3*subPixel+pixel+2] = (unsigned short)(PQ10000_r(blu)*range+0.5) + 4096;
+						    Line[3*subPixel+pixel]   = (unsigned short)(PQ10000_r(red)*range+fround*0.5) + 4096;   
+							Line[3*subPixel+pixel+1] = (unsigned short)(PQ10000_r(grn)*range+fround*0.5) + 4096;    
+							Line[3*subPixel+pixel+2] = (unsigned short)(PQ10000_r(blu)*range+fround*0.5) + 4096;
 													 
 						 } else {
 							float red, grn, blu;
@@ -479,9 +481,9 @@ if(indexF) {
 									
 							if(blu < 0.0)blu = 0;
 							
-						    Line[3*subPixel+pixel]   = (unsigned short)(PQ10000_r(red)*65535.0+0.5);   
-							Line[3*subPixel+pixel+1] = (unsigned short)(PQ10000_r(grn)*65535.0+0.5);     
-							Line[3*subPixel+pixel+2] = (unsigned short)(PQ10000_r(blu)*65535.0+0.5);    
+						    Line[3*subPixel+pixel]   = (unsigned short)(PQ10000_r(red)*65535.0+fround*0.5);   
+							Line[3*subPixel+pixel+1] = (unsigned short)(PQ10000_r(grn)*65535.0+fround*0.5);     
+							Line[3*subPixel+pixel+2] = (unsigned short)(PQ10000_r(blu)*65535.0+fround*0.5);    
 						
 						 }
 					}
@@ -541,6 +543,10 @@ double PQ10000_r( double L)
   // Lw, Lb not used since absolute Luma used for PQ
   // input assumes normalized luma 0-1
   V = pow((0.8359375+ 18.8515625*pow((L),0.1593017578))/(1+18.6875*pow((L),0.1593017578)),78.84375);
+  //int tempInt = 1023.0*V;
+  //V=(tempInt*64)/65535.0;
+  //printf("%d, %f\n",tempInt, V);
+
   return V;
 }
 

@@ -36,3 +36,29 @@ pattern5: (needs to be updated...writes a tiff with alpha which is less compatib
 Generates a static image of blocks of color offsets from RGB and a linear grayscale ramp of very limited extent. The pattern is generated in code value space for a 16 bit tiff centered around codevalue 32000. It is intended to be used as input to a matrixing operation to transform it into something that can be used as floating point linear data.  (e.g. scale the 32000 point in the tiff to 0.5 or any value and treat the RGB values as some colorspace such as P3, 2020, 709, etc.)
 
 usage is:  pattern5 -one # , where # is how many code values in the offsets.
+
+
+**pattern9** (banded ramp)
+
+Writes a tiff with a ramp split into bands. Options include -min and -max (nit range of the ramp), -bands (number of steps), -maxC (nit level of the surround), -r -g -b (color scale factors), -legal, -2020, -idx, -UHD, -UHD2, -2K, -4K and -nosafe. See P9.sh for examples.
+
+**pattern10**
+
+Writes numbered frames (-frame) for building a DCP. See pattern10.sh, which feeds the frames to OpenDCP.
+
+**pattern, pattern2, pattern3, pattern4**
+
+Earlier ramp patterns. They repeat a ramp of values down the image (pattern4 also uses standard illuminant white points). Most of the patterns assume a 3840x2160 frame (see the comment at the top of each source file).
+
+**PQ**
+
+Small helper for the PQ transfer function, with -EOTF and -IEOTF options.
+
+
+## Building
+
+`make` builds pattern through pattern10 and PQ. It needs g++ and libtiff (the makefile links with -ltiff). `make clean` removes the binaries.
+
+## Animation
+
+animation.sh builds the bit depth comparison animation. The animation folder holds its comparison charts (CMP16-*.png).
