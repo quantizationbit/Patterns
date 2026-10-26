@@ -40,7 +40,9 @@ usage is:  pattern5 -one # , where # is how many code values in the offsets.
 
 **pattern9** (banded ramp)
 
-Writes a tiff with a ramp split into bands. Options include -min and -max (nit range of the ramp), -bands (number of steps), -maxC (nit level of the surround), -r -g -b (color scale factors), -legal, -2020, -idx, -UHD, -UHD2, -2K, -4K and -nosafe. See P9.sh for examples.
+Writes a tiff with a ramp split into bands, drawn inside a title safe window. By default the ramp is inset 2.5 percent from each edge of the frame, and the border around it (the surround) is filled at the -maxC nit level. -nosafe sets the inset to zero so the ramp spans the full frame.
+
+Other options include -min and -max (nit range of the ramp), -bands (number of steps), -r -g -b (color scale factors), -legal, -2020, -idx, -UHD, -UHD2, -2K and -4K. See P9.sh for examples.
 
 **pattern10**
 
