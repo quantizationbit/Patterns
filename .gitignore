@@ -7,6 +7,7 @@
 
 !.gitignore
 !README.md
+!LICENSE
 !makefile
 
 # C pattern programs built by the makefile

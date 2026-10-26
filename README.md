@@ -71,3 +71,7 @@ Examples: `PQ -IEOTF 100` prints 0.508078, `PQ -IEOTF 203` prints 0.580689, `PQ 
 ## Animation
 
 animation.sh builds the bit depth comparison animation. The animation folder holds its comparison charts (CMP16-*.png).
+
+## License
+
+Public domain, under the Unlicense (see LICENSE). Everything here, including the sample images and archives (which are output of these programs), is provided as is, with no warranty of any kind.
